@@ -1,0 +1,76 @@
+function enough_fuel()
+    local fuel_level = turtle.getFuelLevel()
+    print("fuel: ", fuel_level)
+
+    if fuel_level < 100 then
+        print("low fuel level... consider refueling.")
+
+    elseif fuel_level == "unlimited" then
+        print("no fuel left")
+    end
+end
+
+function farm_tree()
+    function force_forward()
+        while (~turtle.forward()) do
+            turtle.dig()
+        end
+    end
+
+    function force_up()
+        while (~turtle.up) do
+            turtle.digUp()
+        end
+    end
+
+    force_forward()
+    while (turtle.detectUp()) do
+        force_up()
+    end
+end
+
+function go_down()
+    while (~turtle.detectDown()) do
+        turtle.down()
+    end
+end
+
+function collect_sapling_and_station()
+    function move(dir)
+        if dir == "left" then
+            turtle.turnLeft()
+        elseif dir == "right" then
+            turtle.turnRight()
+        end
+        turtle.forward()
+    end
+
+    move("left")
+    turtle.suck()
+    move("right")
+    move("right")
+    turtle.forward()
+    move("right")
+    turtle.forward()
+    move("right")
+    turtle.turnRight()
+end
+
+function back_to_start_pos()
+
+end
+
+function plant_tree()
+end
+
+function muck_or_wait()
+end
+
+while enough_fuel() do
+    farm_tree()
+    go_down()
+    collect_sapling()
+    back()
+    plant_tree()
+    muck_or_wait()
+end
