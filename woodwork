@@ -60,9 +60,26 @@ function collect_sapling_and_station()
 end
 
 function plant_tree()
+    turtle.select(2)
+    local data = turtle.getItemDetail()
+    if data.name == "minecraft:sapling" and turtle.getItemCount(2) > 1 then
+        turtle.place()
+    end
 end
 
 function muck_or_wait()
+    while (true) do
+        if turtle.detect() then
+            local success, data = turtle.inspect()
+            if success then
+                if data.name == "minecraft:sapling" then
+                    continue
+                elseif data.name == "minecraft:log" then
+                    break
+                end
+            end
+        end
+    end
 end
 
 while enough_fuel() do
