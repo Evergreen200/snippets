@@ -4,9 +4,12 @@ function enough_fuel()
 
     if fuel_level < 100 then
         print("low fuel level... consider refueling.")
-
+        return false
     elseif fuel_level == "unlimited" then
         print("no fuel left")
+        return false
+    else
+        return true
     end
 end
 
@@ -65,7 +68,7 @@ end
 while enough_fuel() do
     farm_tree()
     go_down()
-    collect_sapling()
+    collect_sapling_and_station()
     plant_tree()
     muck_or_wait()
 end
