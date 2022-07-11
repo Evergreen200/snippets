@@ -18,7 +18,7 @@ function farm_tree()
     end
 
     function force_up()
-        while (~turtle.up) do
+        while (turtle.up() == false) do
             turtle.digUp()
         end
     end
@@ -30,7 +30,7 @@ function farm_tree()
 end
 
 function go_down()
-    while (~turtle.detectDown()) do
+    while (turtle.detectDown() == false) do
         turtle.down()
     end
 end
@@ -56,10 +56,6 @@ function collect_sapling_and_station()
     turtle.turnRight()
 end
 
-function back_to_start_pos()
-
-end
-
 function plant_tree()
 end
 
@@ -70,7 +66,6 @@ while enough_fuel() do
     farm_tree()
     go_down()
     collect_sapling()
-    back()
     plant_tree()
     muck_or_wait()
 end
