@@ -12,7 +12,7 @@ end
 
 function farm_tree()
     function force_forward()
-        while (~turtle.forward()) do
+        while (turtle.forward() == false) do
             turtle.dig()
         end
     end
