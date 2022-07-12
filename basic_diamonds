@@ -1,41 +1,34 @@
-function farm_tree()
-    function force_forward()
-        while (turtle.forward() == false) do
+local len = 0
+
+function mine(len)
+    function move_forward()
+        if turtle.detect() then
             turtle.dig()
         end
+        turtle.forward()
     end
 
-    function force_up()
-        while (turtle.up() == false) do
+    function move_upwards()
+        if turtle.detectUp() then
             turtle.digUp()
         end
+        turtle.up()
     end
 
-    force_forward()
-    while (turtle.detectUp()) do
-        force_up()
-    end
-end
-
-function go_down()
-    while (turtle.detectDown() == false) do
+    for i = 1, len do
+        move_forward()
+        move_upwards()
         turtle.down()
     end
-end
-
-while (true) do
-    if turtle.detect() then
-        local success, data = turtle.inspect()
-        if success and data.name == "minecraft:log" then
-            farm_tree()
-            go_down()
-        end
-    else
-        turtle.select(2)
-        if turtle.getItemCount() > 0 then
-            turtle.place()
-        else
-            break
-        end
+    turtle.turnLeft()
+    turtle.turnLeft()
+    for i = 1, len do
+        move_forward() -- to ensure that the turtle will get to the beginning even when gravel is falling down
     end
 end
+
+io.write("How long do you wish to be your tunnel? ")
+len = io.read()
+io.write("Alright! " .. len .. " it is! Program initiated...")
+
+mine(len)
