@@ -1,0 +1,34 @@
+function farm_tree()
+    function force_forward()
+        while (turtle.forward() == false) do
+            turtle.dig()
+        end
+    end
+
+    function force_up()
+        while (turtle.up() == false) do
+            turtle.digUp()
+        end
+    end
+
+    force_forward()
+    while (turtle.detectUp()) do
+        force_up()
+    end
+end
+
+function go_down()
+    while (turtle.detectDown() == false) do
+        turtle.down()
+    end
+end
+
+while (true) do
+    if turtle.detect() then
+        local success, data = turtle.inspect()
+        if success and data.name == "minecraft:log" then
+            farm_tree()
+            go_down()
+        end
+    end
+end
