@@ -30,5 +30,12 @@ while (true) do
             farm_tree()
             go_down()
         end
+    else
+        turtle.select(2)
+        if turtle.getItemCount() > 0 then
+            turtle.place()
+        else
+            break
+        end
     end
 end
