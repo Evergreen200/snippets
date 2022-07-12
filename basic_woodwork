@@ -29,6 +29,7 @@ while (true) do
         if success and data.name == "minecraft:log" then
             farm_tree()
             go_down()
+            turtle.back()
         end
     else
         turtle.select(2)
